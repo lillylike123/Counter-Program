@@ -16,7 +16,7 @@ body {
 }
 
 
-/*light*/
+/* light */
 
 body.light {
     background-color: #f0f2f5;
@@ -82,7 +82,6 @@ body.cyberpunk #counterCard{
 body.cyberpunk .buttons {
     background-color: #ff007f;
     color: #fff;
-    text-transform: uppercase;
     font-weight: bold;
     border: 1px solid #914a7f;
     box-shadow: 0 0 5px #ff007f;
@@ -92,6 +91,29 @@ body.cyberpunk #resetBtn {
     color: #000;
     box-shadow: 0 0 5px #00ffcc;
    
+}
+
+/* cute */
+
+body.cute {
+    background-color: #f8e1ed;
+    color: #333;
+}
+
+body.cute #counterCard{
+    background-color: #ffffff;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1)
+}
+
+body.cute .buttons {
+    background-color: #ff7fa5;
+    color: white;
+}
+body.cute #resetBtn {
+    background-color: #ff7fa5;
+}
+body.cute .buttons:hover {
+    filter: brightness(90%);
 }
 
 .theme-container {
