@@ -2,57 +2,143 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family: 'Haventia', Tahoma, Geneva, Verdana, sans-serif
 }
 
 body {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: backround-color 0.3s ease, color 0.3s ease;
+    
 }
 
 
+/*light*/
 
-
-
-
-
-
-
-#countLabel{
-    display: block;
-    text-align: center;
-    font-size: 10em;
-    font-family: Open Sans;
-
+body.light {
+    background-color: #f0f2f5;
+    color: #333;
 }
 
-#btnContainer{
-   text-align: center;
+body.light #counterCard{
+    background-color: #ffffff;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1)
 }
 
-.buttons{
+body.light .buttons {
+    background-color: #7c7d81;
+    color: white;
+}
+body.light #resetBtn {
+    background-color: #7c7d81;
+}
+body.light .buttons:hover {
+    filter: brightness(90%);
+}
 
-    padding: 10px 20px;
-    font-size: 1.5em;
-    font-family: Open Sans;
- 
-    background-color: rgb(236, 147, 147);
+/* dark */
+
+
+body.dark {
+    background-color: #272626;
+    color: #ffffff;
+}
+
+body.dark #counterCard{
+    background-color: #1e1e1e;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+
+body.dark .buttons {
+    background-color: #a34040;
+    color: rgb(255, 255, 255);
+}
+body.dark #resetBtn {
+    background-color: #a34040;
+    color: rgb(255, 255, 255);
+}
+body.dark .buttons:hover {
+    filter: brightness(120%);
+}
+
+/* cyberpunk */
+
+
+body.cyberpunk {
+    background-color: #000b19;
+    color: #00ffcc;
+}
+
+body.cyberpunk #counterCard{
+    background-color: #051622;
+    box-shadow: 0px 0px 20px #ff007f;
+    border: 2px solid #ff007f;
+}
+
+body.cyberpunk .buttons {
+    background-color: #ff007f;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: 1px solid #914a7f;
+    box-shadow: 0 0 5px #ff007f;
+}
+body.cyberpunk #resetBtn {
+    background-color: #00ffcc;
+    color: #000;
+    box-shadow: 0 0 5px #00ffcc;
+   
+}
+
+.theme-container {
+    margin: 10px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+#themeSelect {
+    padding: 5px 10px;
     border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s;
-
 }
 
-.buttons:hover
-{
-    background-color: rgb(179, 113, 113);
-
-}
-
-header{
+#counterCard {
     text-align: center;
-    font-family: Open Sans;
-    margin-top: 20px;
-    color: rgb(236, 147, 147);
-    outline: black;
-    outline-offset: 10px;
+    padding: 100px;
+    border-radius: 15px;
+    min-width: 350px;
+    transition: all 0.3s ease;
+}
+
+#countLabel {
+    display: block;
+    font-size: 6rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#btnContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.buttons {
+    flex: 1;
+    padding: 12px 20px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.1s ease, filter 0.2s ease;
+}
+
+/* Tactile press effect */
+.buttons:active {
+    transform: scale(0.95);
 }
