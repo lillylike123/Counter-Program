@@ -85,6 +85,7 @@ body.cyberpunk .buttons {
     font-weight: bold;
     border: 1px solid #914a7f;
     box-shadow: 0 0 5px #ff007f;
+    padding: 12px 20px;
 }
 body.cyberpunk #resetBtn {
     background-color: #00ffcc;
@@ -96,9 +97,9 @@ body.cyberpunk #resetBtn {
 /* cute */
 
 body.cute {
-    background-color: #f8e1ed;
-    color: #333;
+    background-color: #f8ddea;
 }
+
 
 body.cute #counterCard{
     background-color: #ffffff;
