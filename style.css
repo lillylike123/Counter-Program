@@ -15,7 +15,30 @@ body {
     
 }
 
+.multiplier-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 25px;
+}
 
+.mult-btn {
+    background: transparent;
+    border: 1px solid currentColor;
+    color: inherit;
+    padding: 4px 14px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: all 0.2s ease;
+
+}
+
+.mult-btn:hover {
+    opacity: 0.8;
+}
 /* light */
 
 body.light {
@@ -37,6 +60,13 @@ body.light #resetBtn {
 }
 body.light .buttons:hover {
     filter: brightness(90%);
+}
+
+body.light .mult-btn.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    opacity: 1;
 }
 
 /* dark */
@@ -63,6 +93,13 @@ body.dark #resetBtn {
 }
 body.dark .buttons:hover {
     filter: brightness(120%);
+}
+
+body.dark .mult-btn.active {
+    background-color: #4e4e4e;
+    color: #ffffff;
+    border-color: #6b6b6b;
+    opacity: 1;
 }
 
 /* cyberpunk */
@@ -94,6 +131,17 @@ body.cyberpunk #resetBtn {
    
 }
 
+
+body.cyberpunk .mult-btn.active {
+    background-color: #00ffcc;
+    color: #000;
+    border-color: #00ffcc;
+    opacity: 1;
+    box-shadow: 0 0 10px #00ffcc;
+    opacity: 1;
+    box-shadow: 0 0 10px #00ffcc;
+}
+
 /* cute */
 
 body.cute {
@@ -115,6 +163,13 @@ body.cute #resetBtn {
 }
 body.cute .buttons:hover {
     filter: brightness(90%);
+}
+
+body.cute .mult-btn.active {
+    background-color: #dd85f3;
+    color: rgb(255, 255, 255);
+    border-color: #ffd5f2;
+    opacity: 1;
 }
 
 .theme-container {

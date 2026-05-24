@@ -1,4 +1,5 @@
 let count = parseInt(localStorage.getItem("savedCount")) || 0;
+let stepSize = 1;
 
 const decreaseBtn = document.getElementById("decreaseBtn");
 const resetBtn = document.getElementById("resetBtn");
@@ -7,6 +8,7 @@ const countLabel = document.getElementById("countLabel");
 const canvas = document.getElementById("particleCanvas");
 const ctx = canvas.getContext("2d")
 const themeSelect = document.getElementById("themeSelect");
+const multButtons = document.querySelectorAll(".mult-btn");
 
 countLabel.textContent = count;
 
@@ -26,7 +28,13 @@ class Particle {
         this.size = Math.random() * 6 + 4;
         this.speedX = Math.random() * 6 -3;
         this.speedY = Math.random() * -6 - 2;
-        const colors = document.body.className === 'cyberpunk' ? ['#ff007f', '#00ffcc'] : 'cyberpunk' ? ['#f787db', '#db90ee'] : ['#007bff', '#6c757d', '#ffc107'];
+        const colors = document.body.className === 'cyberpunk' 
+        ? ['#ff007f', '#00ffcc'] 
+        : document.body.className === 'cute' 
+        ? ['#f787db', '#db90ee'] 
+        :  document.body.className === 'dark' 
+        ? ['#df2563', '#444141'] 
+        : ['#007bff', '#6c757d', '#ffc107'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.gravity = 0.15;
         this.alpha = 1;
@@ -79,6 +87,8 @@ function playSound(type) {
     oscillator.connect(gainNode);
     gainNode.connect(audioCtx.destination);
 
+    let pitchMod = stepSize == 10 ? 1.5 : (stepSize === 5 ? 1.2 : 1.0);
+
 if (type === 'increase') {
         oscillator.type = 'sine';
         oscillator.frequency.setValueAtTime(440, audioCtx.currentTime); // A4 note
@@ -113,28 +123,34 @@ function updateCounter(newValue, actionType) {
     localStorage.setItem("savedCount", count);
     playSound(actionType);
 
-    
-    if (count !== 0 && count % 10 === 0 && count > oldValue) {
+  if (count !== 0 && Math.floor(count / 10) > Math.floor(oldValue / 10) && count > oldValue) {
         triggerMilestoneEffect();
     }
 }
 
 
-increaseBtn.onclick = () => updateCounter(count + 1, 'increase');
-decreaseBtn.onclick = () => updateCounter(count - 1, 'decrease');
+increaseBtn.onclick = () => updateCounter(count + stepSize, 'increase');
+decreaseBtn.onclick = () => updateCounter(count - stepSize, 'decrease');
 resetBtn.onclick = () => updateCounter(0, 'reset');
 
+multButtons.forEach(btn => {
+    btn.onclick = () => {
+        multButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        stepSize = parseInt(btn.getAttribute("data-mult"));
+    };
+});
+
+if (themeSelect) {
 themeSelect.onchange = () => {
     document.body.className = themeSelect.value;
     localStorage.setItem("savedTheme", themeSelect.value);
 };
-
-// Auto-load theme preference on system boot
 const savedTheme = localStorage.getItem("savedTheme") || "light";
 themeSelect.value = savedTheme;
 document.body.className = savedTheme;
+}
 
-// Accessibility Keyboard Listeners
 window.addEventListener('keydown', (e) => {
     if (e.key === '+' || e.key === 'ArrowUp') {
         increaseBtn.click();
@@ -143,5 +159,11 @@ window.addEventListener('keydown', (e) => {
     } else if (e.key.toLowerCase() === 'r' || e.key === ' ') {
         e.preventDefault(); 
         resetBtn.click();
+    } else if (e.key === '1') {
+        document.querySelector('[data-mult="1"]').click();
+    } else if (e.key === '2') {
+        document.querySelector('[data-mult="5"]').click();
+    } else if (e.key === '3') {
+        document.querySelector('[data-mult="10"]').click();
     }
 });
