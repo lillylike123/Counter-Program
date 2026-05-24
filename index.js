@@ -1,10 +1,14 @@
 let count = parseInt(localStorage.getItem("savedCount")) || 0;
 let stepSize = 1;
 
+let comboCount = 0;
+let comboTimer = null;
+
 const decreaseBtn = document.getElementById("decreaseBtn");
 const resetBtn = document.getElementById("resetBtn");
 const increaseBtn = document.getElementById("increaseBtn");
 const countLabel = document.getElementById("countLabel");
+const comboLabel = document.getElementById ('comboLabel');
 const canvas = document.getElementById("particleCanvas");
 const ctx = canvas.getContext("2d")
 const themeSelect = document.getElementById("themeSelect");
@@ -22,20 +26,25 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
 class Particle {
-    constructor(x, y) {
+    constructor(x, y, customColors = null) {
         this.x = x;
         this.y = y;
         this.size = Math.random() * 6 + 4;
         this.speedX = Math.random() * 6 -3;
         this.speedY = Math.random() * -6 - 2;
-        const colors = document.body.className === 'cyberpunk' 
+        const currentTheme = document.body.className;
+
+        const defaultColors = currentTheme === 'cyberpunk' 
         ? ['#ff007f', '#00ffcc'] 
-        : document.body.className === 'cute' 
+        : currentTheme === 'cute' 
         ? ['#f787db', '#db90ee'] 
-        :  document.body.className === 'dark' 
+        :  currentTheme === 'dark' 
         ? ['#df2563', '#444141'] 
         : ['#007bff', '#6c757d', '#ffc107'];
-        this.color = colors[Math.floor(Math.random() * colors.length)];
+
+        const finalColors = customColors || defaultColors;
+        this.color = finalColors[Math.floor(Math.random() * colors.length)];
+        
         this.gravity = 0.15;
         this.alpha = 1;
     }
@@ -115,6 +124,36 @@ if (type === 'increase') {
     }
 }
 
+function handleComboClick(isIncrement) {
+    if (!isIncrement) {
+        resetComboTracker();
+        return;
+    }
+
+    comboCount++;
+
+    if (comboCount >= 2) {
+        comboLabel.textContent = `${comboCount}x Combo! 🔥`;
+        comboLabel.classList.remove("hidden")
+
+        comboLabel.style.animation = 'none';
+        void comboLabel.offsetWidth;
+        comboLabel.style.animation = 'bouncePop 0.15s ease-out'
+    }
+
+    if(comboCount % 20 === 0) {
+        triggerMilestoneEffect(['#ff4500', '#ffaa00', '#ff0000']);
+    }
+
+    clearTimeout(comboTimer);
+    comboTimer = setTimeout(resetComboTracker, 1500);
+}
+
+function resetComboTracker() {
+    comboCount = 0;
+    comboLabel.classList.add("hidden");
+}
+ 
 
 function updateCounter(newValue, actionType) {
     const oldValue = count;
@@ -123,6 +162,8 @@ function updateCounter(newValue, actionType) {
     localStorage.setItem("savedCount", count);
     playSound(actionType);
 
+    handleComboClick (actionType === 'increase');
+    
   if (count !== 0 && Math.floor(count / 10) > Math.floor(oldValue / 10) && count > oldValue) {
         triggerMilestoneEffect();
     }

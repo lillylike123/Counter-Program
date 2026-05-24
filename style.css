@@ -84,11 +84,11 @@ body.dark #counterCard{
 }
 
 body.dark .buttons {
-    background-color: #a34040;
+    background-color: #e07801;
     color: rgb(255, 255, 255);
 }
 body.dark #resetBtn {
-    background-color: #a34040;
+    background-color: #e07801;
     color: rgb(255, 255, 255);
 }
 body.dark .buttons:hover {
@@ -229,3 +229,33 @@ body.cute .mult-btn.active {
     z-index: -1;
     pointer-events: none;
 }
+
+#comboLabel {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    height: 25px;
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+    animation: bouncePop 0.15s ease-out;
+}
+
+#comboLabel.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+    
+}
+
+@keyframes bouncePop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+
+}
+
+body.light #comboLabel { color: #ff4500; }
+body.dark #comboLabel { color: #ff8c00; text-shadow: 0 0 8px rgba(255,140,0,0.5); }
+body.cyberpunk #comboLabel { color: #ff007f; text-shadow: 0 0 10px #ff007f; }
+body.cute #comboLabel { color: #ff69b4; text-shadow: 0 0 5px rgba(221, 90, 155, 0.4); }
