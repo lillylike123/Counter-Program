@@ -84,11 +84,11 @@ body.dark #counterCard{
 }
 
 body.dark .buttons {
-    background-color: #e07801;
+    background-color: #750a02;
     color: rgb(255, 255, 255);
 }
 body.dark #resetBtn {
-    background-color: #e07801;
+    background-color: #750a02;
     color: rgb(255, 255, 255);
 }
 body.dark .buttons:hover {

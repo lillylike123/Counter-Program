@@ -39,11 +39,11 @@ class Particle {
         : currentTheme === 'cute' 
         ? ['#f787db', '#db90ee'] 
         :  currentTheme === 'dark' 
-        ? ['#df2563', '#444141'] 
+        ? ['#df2525', '#ff0000'] 
         : ['#007bff', '#6c757d', '#ffc107'];
 
         const finalColors = customColors || defaultColors;
-        this.color = finalColors[Math.floor(Math.random() * colors.length)];
+        this.color = finalColors[Math.floor(Math.random() * finalColors.length)];
         
         this.gravity = 0.15;
         this.alpha = 1;
@@ -163,7 +163,7 @@ function updateCounter(newValue, actionType) {
     playSound(actionType);
 
     handleComboClick (actionType === 'increase');
-    
+
   if (count !== 0 && Math.floor(count / 10) > Math.floor(oldValue / 10) && count > oldValue) {
         triggerMilestoneEffect();
     }
